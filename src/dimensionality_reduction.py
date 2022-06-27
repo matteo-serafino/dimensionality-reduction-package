@@ -1,11 +1,11 @@
+import umap
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 from sklearn.manifold import TSNE
 from sklearn.decomposition import PCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.preprocessing import StandardScaler
-import umap
+
+from plot import Plot
 
 class DimensionalityReduction():
 
@@ -21,14 +21,14 @@ class DimensionalityReduction():
             print("t-SNE 3d dimensionality reduction running...")
             df_tsne = pd.DataFrame(TSNE(n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2", "component_3"])
             df_tsne["label"] = y
-            self.plot_3d(df_tsne, title="t-SNE")
+            Plot.plot_3d(df=df_tsne, title="t-SNE")
 
         elif (n_components == 2):
 
             print("t-SNE 2d dimensionality reduction running...")
             df_tsne = pd.DataFrame(TSNE(n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2"])
             df_tsne["label"] = y
-            self.plot_2d(df_tsne, title="t-SNE")
+            Plot.plot_2d(df=df_tsne, title="t-SNE")
 
         elif (n_components == 1):
 
@@ -37,10 +37,9 @@ class DimensionalityReduction():
             df_tsne["label"] = y
 
         else:
-            return -1
+            return None
 
-        g = sns.pairplot(df_tsne, hue='label', height=2.5)
-        plt.show(block=False)
+        Plot.matrix_plot(df=df_tsne)
 
         return df_tsne
 
@@ -53,14 +52,14 @@ class DimensionalityReduction():
             print("UMAP 3d dimensionality reduction running...")
             df_umap = pd.DataFrame(umap.UMAP(random_state=42, n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2", "component_3"])
             df_umap["label"] = y
-            self.plot_3d(df_umap, title="UMAP")
+            Plot.plot_3d(df=df_umap, title="UMAP")
 
         elif (n_components == 2):
 
             print("UMAP 2d dimensionality reduction running...")
             df_umap = pd.DataFrame(umap.UMAP(random_state=42, n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2"])
             df_umap["label"] = y
-            self.plot_2d(df_umap, title="UMAP")
+            Plot.plot_2d(df=df_umap, title="UMAP")
 
         elif (n_components == 1):
 
@@ -69,10 +68,9 @@ class DimensionalityReduction():
             df_umap["label"] = y
         
         else:
-            return -1
+            return None
 
-        g = sns.pairplot(df_umap, hue='label', height=2.5)
-        plt.show(block=False)
+        Plot.matrix_plot(df=df_umap)
 
         return df_umap
 
@@ -92,20 +90,19 @@ class DimensionalityReduction():
             print("LDA 2d dimensionality reduction running...")
             df_lda = pd.DataFrame(LinearDiscriminantAnalysis(n_components=2).fit_transform(X_scaled, y), columns=["component_1", "component_2"])
             df_lda["label"] = y
-            self.plot_2d(df_lda, title="LDA")
+            Plot.plot_2d(df=df_lda, title="LDA")
 
         elif (n_classes == 4):
 
             print("LDA 3d dimensionality reduction running...")
             df_lda = pd.DataFrame(LinearDiscriminantAnalysis(n_components=3).fit_transform(X_scaled, y), columns=["component_1", "component_2", "component_3"])
             df_lda["label"] = y
-            self.plot_3d(df_lda, title="LDA")
+            Plot.plot_3d(df=df_lda, title="LDA")
         
         else:
-            return -1
+            return None
 
-        g = sns.pairplot(df_lda, hue='label', height=2.5)
-        plt.show(block=False)
+        Plot.matrix_plot(df=df_lda)
 
         return df_lda
 
@@ -118,14 +115,14 @@ class DimensionalityReduction():
             print("PCA 3d dimensionality reduction running...")
             df_pca = pd.DataFrame(PCA(n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2", "component_3"])
             df_pca["label"] = y
-            self.plot_3d(df_pca, title="PCA")
+            Plot.plot_3d(df=df_pca, title="PCA")
 
         elif(n_components == 2):
 
             print("PCA 2d dimensionality reduction running...")
             df_pca = pd.DataFrame(PCA(n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2"])
             df_pca["label"] = y
-            self.plot_2d(df_pca, title="PCA")
+            Plot.plot_2d(df=df_pca, title="PCA")
 
         elif(n_components == 1):
 
@@ -134,9 +131,8 @@ class DimensionalityReduction():
             df_pca["label"] = y
 
         else:
-            return -1
+            return None
 
-        g = sns.pairplot(df_pca, hue='label', height=2.5)
-        plt.show(block = False)
+        Plot.matrix_plot(df=df_pca)
 
         return df_pca

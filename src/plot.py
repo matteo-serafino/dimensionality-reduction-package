@@ -18,10 +18,10 @@ class Plot():
 
         for c in category:
             plt.scatter(df.loc[df[target_column] == c, "component_1"],
-                    df.loc[df[target_column] == c, "component_2"],
-                    marker = 'o',
-                    alpha = 0.5,
-                    label=c)
+                df.loc[df[target_column] == c, "component_2"],
+                marker = 'o',
+                alpha = 0.5,
+                label=c)
         
         plt.legend()
 

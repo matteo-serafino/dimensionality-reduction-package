@@ -1,4 +1,3 @@
-import imp
 import umap
 import pandas as pd
 from sklearn.manifold import TSNE
@@ -11,7 +10,7 @@ from sklearn.decomposition import KernelPCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.preprocessing import StandardScaler
 
-from plot import Plot
+from src.plot import Plot
 
 class DimensionalityReduction():
 
@@ -27,14 +26,14 @@ class DimensionalityReduction():
             print("t-SNE 3d dimensionality reduction running...")
             df_tsne = pd.DataFrame(TSNE(n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2", "component_3"])
             df_tsne["label"] = y
-            Plot.plot_3d(df=df_tsne, title="t-SNE")
+            Plot().plot_3d(df=df_tsne, title="t-SNE")
 
         elif (n_components == 2):
 
             print("t-SNE 2d dimensionality reduction running...")
             df_tsne = pd.DataFrame(TSNE(n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2"])
             df_tsne["label"] = y
-            Plot.plot_2d(df=df_tsne, title="t-SNE")
+            Plot().plot_2d(df=df_tsne, title="t-SNE")
 
         elif (n_components == 1):
 
@@ -45,7 +44,7 @@ class DimensionalityReduction():
         else:
             return None
 
-        Plot.matrix_plot(df=df_tsne)
+        Plot().matrix_plot(df=df_tsne)
 
         return df_tsne
 
@@ -58,14 +57,14 @@ class DimensionalityReduction():
             print("UMAP 3d dimensionality reduction running...")
             df_umap = pd.DataFrame(umap.UMAP(random_state=42, n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2", "component_3"])
             df_umap["label"] = y
-            Plot.plot_3d(df=df_umap, title="UMAP")
+            Plot().plot_3d(df=df_umap, title="UMAP")
 
         elif (n_components == 2):
 
             print("UMAP 2d dimensionality reduction running...")
             df_umap = pd.DataFrame(umap.UMAP(random_state=42, n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2"])
             df_umap["label"] = y
-            Plot.plot_2d(df=df_umap, title="UMAP")
+            Plot().plot_2d(df=df_umap, title="UMAP")
 
         elif (n_components == 1):
 
@@ -76,7 +75,7 @@ class DimensionalityReduction():
         else:
             return None
 
-        Plot.matrix_plot(df=df_umap)
+        Plot().matrix_plot(df=df_umap)
 
         return df_umap
 
@@ -96,19 +95,19 @@ class DimensionalityReduction():
             print("LDA 2d dimensionality reduction running...")
             df_lda = pd.DataFrame(LinearDiscriminantAnalysis(n_components=2).fit_transform(X_scaled, y), columns=["component_1", "component_2"])
             df_lda["label"] = y
-            Plot.plot_2d(df=df_lda, title="LDA")
+            Plot().plot_2d(df=df_lda, title="LDA")
 
         elif (n_classes == 4):
 
             print("LDA 3d dimensionality reduction running...")
             df_lda = pd.DataFrame(LinearDiscriminantAnalysis(n_components=3).fit_transform(X_scaled, y), columns=["component_1", "component_2", "component_3"])
             df_lda["label"] = y
-            Plot.plot_3d(df=df_lda, title="LDA")
+            Plot().plot_3d(df=df_lda, title="LDA")
         
         else:
             return None
 
-        Plot.matrix_plot(df=df_lda)
+        Plot().matrix_plot(df=df_lda)
 
         return df_lda
 
@@ -121,14 +120,14 @@ class DimensionalityReduction():
             print("PCA 3d dimensionality reduction running...")
             df_pca = pd.DataFrame(PCA(n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2", "component_3"])
             df_pca["label"] = y
-            Plot.plot_3d(df=df_pca, title="PCA")
+            Plot().plot_3d(df=df_pca, title="PCA")
 
         elif(n_components == 2):
 
             print("PCA 2d dimensionality reduction running...")
             df_pca = pd.DataFrame(PCA(n_components=n_components).fit_transform(X_scaled), columns=["component_1", "component_2"])
             df_pca["label"] = y
-            Plot.plot_2d(df=df_pca, title="PCA")
+            Plot().plot_2d(df=df_pca, title="PCA")
 
         elif(n_components == 1):
 
@@ -139,7 +138,7 @@ class DimensionalityReduction():
         else:
             return None
 
-        Plot.matrix_plot(df=df_pca)
+        Plot().matrix_plot(df=df_pca)
 
         return df_pca
 
@@ -153,7 +152,7 @@ class DimensionalityReduction():
             df_fa = pd.DataFrame(FactorAnalysis(n_components=n_components, rotation="varimax", random_state=0).fit_transform(X_scaled), 
                 columns=["component_1", "component_2", "component_3"])
             df_fa["label"] = y
-            Plot.plot_3d(df=df_fa, title="Factor Analysis")
+            Plot().plot_3d(df=df_fa, title="Factor Analysis")
 
         elif(n_components == 2):
 
@@ -161,7 +160,7 @@ class DimensionalityReduction():
             df_fa = pd.DataFrame(FactorAnalysis(n_components=n_components, rotation="varimax", random_state=0).fit_transform(X_scaled),
                 columns=["component_1", "component_2"])
             df_fa["label"] = y
-            Plot.plot_2d(df=df_fa, title="Factor Analysis")
+            Plot().plot_2d(df=df_fa, title="Factor Analysis")
 
         elif(n_components == 1):
 
@@ -173,11 +172,11 @@ class DimensionalityReduction():
         else:
             return None
 
-        Plot.matrix_plot(df=df_fa)
+        Plot().matrix_plot(df=df_fa)
 
         return df_fa
 
-    def truncated_SVD(self, X, y, n_components:int = 3):
+    def truncated_svd(self, X, y, n_components:int = 3):
 
         X_scaled = StandardScaler().fit(X).transform(X)
 
@@ -186,7 +185,7 @@ class DimensionalityReduction():
             df_tsvd = pd.DataFrame(TruncatedSVD(n_components=n_components, random_state=0).fit_transform(X_scaled), 
                 columns=["component_1", "component_2", "component_3"])
             df_tsvd["label"] = y
-            Plot.plot_3d(df=df_tsvd, title="Truncated SVD")
+            Plot().plot_3d(df=df_tsvd, title="Truncated SVD")
 
         elif(n_components == 2):
 
@@ -194,7 +193,7 @@ class DimensionalityReduction():
             df_tsvd = pd.DataFrame(TruncatedSVD(n_components=n_components, random_state=0).fit_transform(X_scaled),
                 columns=["component_1", "component_2"])
             df_tsvd["label"] = y
-            Plot.plot_2d(df=df_tsvd, title="Truncated SVD")
+            Plot().plot_2d(df=df_tsvd, title="Truncated SVD")
 
         elif(n_components == 1):
 
@@ -206,7 +205,7 @@ class DimensionalityReduction():
         else:
             return None
 
-        Plot.matrix_plot(df=df_tsvd)
+        Plot().matrix_plot(df=df_tsvd)
 
         return df_tsvd
 
@@ -219,7 +218,7 @@ class DimensionalityReduction():
             df_kpca = pd.DataFrame(KernelPCA(n_components=n_components, kernel='rbf', gamma=15, random_state=42).fit_transform(X_scaled), 
                 columns=["component_1", "component_2", "component_3"])
             df_kpca["label"] = y
-            Plot.plot_3d(df=df_kpca, title="Kernel PCA")
+            Plot().plot_3d(df=df_kpca, title="Kernel PCA")
 
         elif(n_components == 2):
 
@@ -227,7 +226,7 @@ class DimensionalityReduction():
             df_kpca = pd.DataFrame(KernelPCA(n_components=n_components, kernel='rbf', gamma=15, random_state=42).fit_transform(X_scaled),
                 columns=["component_1", "component_2"])
             df_kpca["label"] = y
-            Plot.plot_2d(df=df_kpca, title="Kernel PCA")
+            Plot().plot_2d(df=df_kpca, title="Kernel PCA")
 
         elif(n_components == 1):
 
@@ -239,7 +238,7 @@ class DimensionalityReduction():
         else:
             return None
 
-        Plot.matrix_plot(df=df_kpca)
+        Plot().matrix_plot(df=df_kpca)
 
         return df_kpca
 
@@ -252,7 +251,7 @@ class DimensionalityReduction():
             df_mds = pd.DataFrame(MDS(n_components=n_components, metric=True, random_state=42).fit_transform(X_scaled), 
                 columns=["component_1", "component_2", "component_3"])
             df_mds["label"] = y
-            Plot.plot_3d(df=df_mds, title="MDS")
+            Plot().plot_3d(df=df_mds, title="MDS")
 
         elif(n_components == 2):
 
@@ -260,7 +259,7 @@ class DimensionalityReduction():
             df_mds = pd.DataFrame(MDS(n_components=n_components, metric=True, random_state=42).fit_transform(X_scaled),
                 columns=["component_1", "component_2"])
             df_mds["label"] = y
-            Plot.plot_2d(df=df_mds, title="MDS")
+            Plot().plot_2d(df=df_mds, title="MDS")
 
         elif(n_components == 1):
 
@@ -272,7 +271,7 @@ class DimensionalityReduction():
         else:
             return None
 
-        Plot.matrix_plot(df=df_mds)
+        Plot().matrix_plot(df=df_mds)
 
         return df_mds
 
@@ -285,7 +284,7 @@ class DimensionalityReduction():
             df_isomap = pd.DataFrame(Isomap(n_neighbord=10, n_components=n_components).fit_transform(X_scaled), 
                 columns=["component_1", "component_2", "component_3"])
             df_isomap["label"] = y
-            Plot.plot_3d(df=df_isomap, title="Isomap")
+            Plot().plot_3d(df=df_isomap, title="Isomap")
 
         elif(n_components == 2):
 
@@ -293,7 +292,7 @@ class DimensionalityReduction():
             df_isomap = pd.DataFrame(Isomap(n_neighbord=10, n_components=n_components).fit_transform(X_scaled),
                 columns=["component_1", "component_2"])
             df_isomap["label"] = y
-            Plot.plot_2d(df=df_isomap, title="Isomap")
+            Plot().plot_2d(df=df_isomap, title="Isomap")
 
         elif(n_components == 1):
 
@@ -305,6 +304,6 @@ class DimensionalityReduction():
         else:
             return None
 
-        Plot.matrix_plot(df=df_isomap)
+        Plot().matrix_plot(df=df_isomap)
 
         return df_isomap

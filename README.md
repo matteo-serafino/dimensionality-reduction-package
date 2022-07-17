@@ -8,8 +8,8 @@ The techniques that will be implemented are:
 * Principal Component Analysis (PCA);
 * Factor Analysis (FA);
 * Truncated SVD;
-* Kernel PCA;
-* Multidimensional Scaling;
+* Kernel Principal Component Analysis;
+* Multidimensional Scaling (MDS);
 * Isometric Mapping (Isomap).
 
 ## t-distributed Stochastic Neighbor Embedding (t-SNE)

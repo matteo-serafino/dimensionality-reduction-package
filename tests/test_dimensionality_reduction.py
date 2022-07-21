@@ -1,6 +1,6 @@
 import unittest
 from sklearn import datasets
-from src.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
 
 dr = DimensionalityReduction()
 

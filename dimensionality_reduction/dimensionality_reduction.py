@@ -13,6 +13,8 @@ from sklearn.preprocessing import StandardScaler
 
 from dimensionality_reduction.services import plot_service as ps
 
+TARGET_COLUMN = "target"
+
 class DimensionalityReduction():
 
     def __init__(self):
@@ -25,12 +27,10 @@ class DimensionalityReduction():
 
         X_scaled = StandardScaler().fit(X).transform(X)
         
-        columns = []
-        for i in range(n_components):
-            columns.append(f"c_{i + 1}")
+        columns = self.__columns_names(n_components)
 
         df = pd.DataFrame(TSNE(n_components=n_components, random_state=42).fit_transform(X_scaled), columns=columns)
-        df['label'] = y
+        df[TARGET_COLUMN] = y
 
         if n_components == 3:
             ps.plot_3d(df=df, title=title)
@@ -49,12 +49,10 @@ class DimensionalityReduction():
 
         X_scaled = StandardScaler().fit(X).transform(X)
 
-        columns = []
-        for i in range(n_components):
-            columns.append(f"c_{i + 1}")
+        columns = self.__columns_names(n_components)
 
         df = pd.DataFrame(umap.UMAP(random_state=42, n_components=n_components).fit_transform(X_scaled), columns=columns)
-        df["label"] = y
+        df[TARGET_COLUMN] = y
 
         if n_components == 3:
             ps.plot_3d(df=df, title=title)
@@ -75,12 +73,10 @@ class DimensionalityReduction():
 
         X_scaled = StandardScaler().fit(X).transform(X)
 
-        columns = []
-        for i in range(n_components):
-            columns.append(f"c_{i + 1}")
+        columns = self.__columns_names(n_components)
 
         df = pd.DataFrame(LinearDiscriminantAnalysis(n_components=n_components).fit_transform(X_scaled, y), columns=columns)
-        df["label"] = y
+        df[TARGET_COLUMN] = y
 
         if n_components == 3:
             ps.plot_3d(df=df, title=title)
@@ -99,12 +95,10 @@ class DimensionalityReduction():
 
         X_scaled = StandardScaler().fit(X).transform(X)
 
-        columns = []
-        for i in range(n_components):
-            columns.append(f"c_{i + 1}")
+        columns = self.__columns_names(n_components)
 
         df= pd.DataFrame(PCA(n_components=n_components).fit_transform(X_scaled), columns=columns)
-        df["label"] = y
+        df[TARGET_COLUMN] = y
 
         if n_components == 3:
             ps.plot_3d(df=df, title=title)
@@ -123,12 +117,10 @@ class DimensionalityReduction():
 
         X_scaled = StandardScaler().fit(X).transform(X)
 
-        columns = []
-        for i in range(n_components):
-            columns.append(f"c_{i + 1}")
+        columns = self.__columns_names(n_components)
 
         df = pd.DataFrame(FactorAnalysis(n_components=n_components, rotation="varimax", random_state=42).fit_transform(X_scaled), columns=columns)
-        df["label"] = y
+        df[TARGET_COLUMN] = y
 
         if n_components == 3:
             ps.plot_3d(df=df, title=title)
@@ -147,12 +139,10 @@ class DimensionalityReduction():
         
         X_scaled = StandardScaler().fit(X).transform(X)
 
-        columns = []
-        for i in range(n_components):
-            columns.append(f"c_{i + 1}")
+        columns = self.__columns_names(n_components)
 
         df = pd.DataFrame(TruncatedSVD(n_components=n_components, random_state=0).fit_transform(X_scaled), columns=columns)
-        df["label"] = y
+        df[TARGET_COLUMN] = y
         
         if n_components == 3:
             ps.plot_3d(df=df, title=title)
@@ -171,12 +161,10 @@ class DimensionalityReduction():
 
         X_scaled = StandardScaler().fit(X).transform(X)
 
-        columns = []
-        for i in range(n_components):
-            columns.append(f"c_{i + 1}")
+        columns = self.__columns_names(n_components)
 
         df = pd.DataFrame(KernelPCA(n_components=n_components, kernel='rbf', gamma=15, random_state=42).fit_transform(X_scaled), columns=columns)
-        df["label"] = y
+        df[TARGET_COLUMN] = y
 
         if n_components == 3:
             ps.plot_3d(df=df, title=title)
@@ -195,12 +183,10 @@ class DimensionalityReduction():
 
         X_scaled = StandardScaler().fit(X).transform(X)
 
-        columns = []
-        for i in range(n_components):
-            columns.append(f"c_{i + 1}")
+        columns = self.__columns_names(n_components)
 
         df = pd.DataFrame(MDS(n_components=n_components, metric=True, random_state=42).fit_transform(X_scaled), columns=columns)
-        df["label"] = y
+        df[TARGET_COLUMN] = y
 
         if n_components == 3:
             ps.plot_3d(df=df, title=title)
@@ -219,12 +205,10 @@ class DimensionalityReduction():
 
         X_scaled = StandardScaler().fit(X).transform(X)
 
-        columns = []
-        for i in range(n_components):
-            columns.append(f"c_{i + 1}")
+        columns = self.__columns_names(n_components)
 
         df = pd.DataFrame(Isomap(n_neighbors=10, n_components=n_components).fit_transform(X_scaled), columns=columns)
-        df["label"] = y
+        df[TARGET_COLUMN] = y
 
         if n_components == 3:
             ps.plot_3d(df=df, title=title)
@@ -235,3 +219,12 @@ class DimensionalityReduction():
         ps.matrix_plot(df=df)
 
         return df
+
+    def __columns_names(self, n_components: int) -> list[str]:
+
+        columns = []
+
+        for i in range(n_components):
+            columns.append(f"c_{i + 1}")
+        
+        return columns

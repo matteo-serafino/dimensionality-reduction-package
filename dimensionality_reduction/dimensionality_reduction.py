@@ -11,7 +11,7 @@ from sklearn.decomposition import KernelPCA
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
 from sklearn.preprocessing import StandardScaler
 
-import services.plot_service as ps
+from dimensionality_reduction.services import plot_service as ps
 
 class DimensionalityReduction():
 

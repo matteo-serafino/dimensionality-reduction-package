@@ -15,7 +15,7 @@ The available techniques are:
 * [Multidimensional Scaling (MDS)](#multidimensional-scaling);
 * [Isometric Mapping (Isomap)](#isometric-mapping-isomap).
 
-At the moment the package is not available using `pip install <PACKAGE-NAME>`.
+The package is available at PyPI using `pip install dimensionality-reduction-package`.
 
 For the installation from the source code click **[here](#installation)**.
 
@@ -55,7 +55,7 @@ t-SNE has been used for visualization in a wide range of applications, including
 
 ### Examples
  ```python
-from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction import DimensionalityReduction
 from sklearn import datasets
 
 dr = DimensionalityReduction()
@@ -80,7 +80,7 @@ LDA works when the measurements made on independent variables for each observati
 
 ### Examples
  ```python
-from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction import DimensionalityReduction
 from sklearn import datasets
 
 dr = DimensionalityReduction()
@@ -106,7 +106,7 @@ To read me about the math behind this dimensionality reduction method I recommen
 
 ### Examples
  ```python
-from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction import DimensionalityReduction
 from sklearn import datasets
 
 dr = DimensionalityReduction()
@@ -129,7 +129,7 @@ PCA can be considered as a unsupervised linear dimensionality reduction techniqu
 
 ### Examples
 ```python
-from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction import DimensionalityReduction
 from sklearn import datasets
 
 dr = DimensionalityReduction()
@@ -150,7 +150,7 @@ Factor Analysis description is arriving!
 
 ### Examples
 ```python
-from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction import DimensionalityReduction
 from sklearn import datasets
 
 dr = DimensionalityReduction()
@@ -171,7 +171,7 @@ Truncated SVD description is arriving!
 
 ### Examples
 ```python
-from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction import DimensionalityReduction
 from sklearn import datasets
 
 dr = DimensionalityReduction()
@@ -192,7 +192,7 @@ Kernel PCA description is arriving!
 
 ### Examples
 ```python
-from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction import DimensionalityReduction
 from sklearn import datasets
 
 dr = DimensionalityReduction()
@@ -213,7 +213,7 @@ Multidimensional Scaling description is arriving!
 
 ### Examples
 ```python
-from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction import DimensionalityReduction
 from sklearn import datasets
 
 dr = DimensionalityReduction()
@@ -234,7 +234,7 @@ Isomap description is arriving!
 
 ### Examples
 ```python
-from dimensionality_reduction.dimensionality_reduction import DimensionalityReduction
+from dimensionality_reduction import DimensionalityReduction
 from sklearn import datasets
 
 dr = DimensionalityReduction()
